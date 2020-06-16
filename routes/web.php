@@ -12,9 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/apa-sarata', 'HomeController@index')->name('apa-sarata');
+Route::get('/apa-dulce', 'HomeController@index')->name('apa-dulce');
+Route::get('/hrana-pesti', 'HomeController@index')->name('hrana-pesti');
