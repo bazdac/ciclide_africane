@@ -20,3 +20,8 @@ Auth::routes();
 Route::get('/apa-sarata', 'HomeController@index')->name('apa-sarata');
 Route::get('/apa-dulce', 'HomeController@index')->name('apa-dulce');
 Route::get('/hrana-pesti', 'HomeController@index')->name('hrana-pesti');
+Route::get('/categorii', 'AdminController@categorii')->name('categorii');
+Route::get('/produse', 'AdminController@produse')->name('produse');
+Route::get('/utilizatori', 'AdminController@utilizatori')->name('utilizatori');
+Route::get('/comenzi', 'AdminController@comenzi')->name('comenzi');
+Route::get('/panou-administrare', 'AdminController@panouAdministrare')->name('panou-administrare');

@@ -27,6 +27,10 @@
                     <div class="col-md-6 d-none d-sm-block text-right">
                         <ul class="top-menu float-right">
                             @auth
+                                @if(auth()->user()->rol == 'admin')
+                                    <li><a href="{{route('panou-administrare')}}">Panou administrare</a></li>
+                                @endif
+
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
@@ -79,6 +83,8 @@
 
 
         @yield('content')
+
+
 
         <section class="background-grey p-t-40 p-b-0">
             <div class="container">
