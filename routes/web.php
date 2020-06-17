@@ -11,17 +11,33 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/home', 'ProdusController@produseToate');
+Route::get('/', 'ProdusController@produseToate')->name('home');
+
 
 Auth::routes();
 
-Route::get('/apa-sarata', 'HomeController@index')->name('apa-sarata');
-Route::get('/apa-dulce', 'HomeController@index')->name('apa-dulce');
-Route::get('/hrana-pesti', 'HomeController@index')->name('hrana-pesti');
-Route::get('/categorii', 'AdminController@categorii')->name('categorii');
-Route::get('/produse', 'AdminController@produse')->name('produse');
-Route::get('/utilizatori', 'AdminController@utilizatori')->name('utilizatori');
-Route::get('/comenzi', 'AdminController@comenzi')->name('comenzi');
-Route::get('/panou-administrare', 'AdminController@panouAdministrare')->name('panou-administrare');
+Route::get('/apa-sarata', 'ProdusController@produseApaSarata')->name('apa-sarata');
+Route::get('/apa-dulce', 'ProdusController@produseApaDulce')->name('apa-dulce');
+Route::get('/hrana-pesti', 'ProdusController@produseHranaPesti')->name('hrana-pesti');
+Route::get('/detalii-produs/{id}', 'ProdusController@produsDetalii')->name('detalii-produs');
+Route::get('/contact', 'HomeController@contact')->name('contact');
+
+
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/cos-cumparaturi', 'UserController@cosCumparaturi')->name('cos-cumparaturi');
+    Route::get('/categorii', 'AdminController@categorii')->name('categorii');
+    Route::get('/produse', 'AdminController@produse')->name('produse');
+    Route::get('/adauga-produs', 'AdminController@adaugaProdus')->name('adauga-produs');
+    Route::get('/creare-produs', 'AdminController@creareProdus')->name('creare-produs');
+    Route::get('/editeaza-produs/{id}', 'AdminController@editeazaProdus')->name('editeaza-produs');
+    Route::get('/actualizare-produs/{id}', 'AdminController@actualizareProdus')->name('actualizare-produs');
+    Route::get('/sterge-produs/{id}', 'AdminController@stergeProdus')->name('sterge-produs');
+
+
+    Route::get('/utilizatori', 'AdminController@utilizatori')->name('utilizatori');
+    Route::get('/comenzi', 'AdminController@comenzi')->name('comenzi');
+    Route::get('/panou-administrare', 'AdminController@panouAdministrare')->name('panou-administrare');
+    Route::get('/lista-poze', 'AdminController@listaPoze')->name('lista-poze');
+});

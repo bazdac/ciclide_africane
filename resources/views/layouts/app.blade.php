@@ -14,6 +14,7 @@
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <link href="{{asset('css/custom.css')}}" rel="stylesheet">
 </head>
+
 <body >
     <div class="body-inner">
         <div id="topbar" class="d-none d-xl-block d-lg-block topbar">
@@ -21,13 +22,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <ul class="top-menu">
-                            <li><a href="#">Bine ai venit @auth {{auth()->user()->email}} @endauth</a></li>
+                            <li>Bine ai venit @auth {{auth()->user()->email}} @endauth</li>
                         </ul>
                     </div>
                     <div class="col-md-6 d-none d-sm-block text-right">
                         <ul class="top-menu float-right">
                             @auth
                                 @if(auth()->user()->rol == 'admin')
+                                    <li><a href="{{route('home')}}">Vezi site</a></li>
                                     <li><a href="{{route('panou-administrare')}}">Panou administrare</a></li>
                                 @endif
 
@@ -71,7 +73,8 @@
                                     <li class="dropdown"><a href="{{route('apa-dulce')}}">Apa dulce</a></li>
                                     <li class="dropdown"><a href="{{route('apa-sarata')}}">Apa sarata</a></li>
                                     <li class="dropdown"><a href="{{route('hrana-pesti')}}">Hrana pesti</a></li>
-                                    <li class="dropdown"><a href="cos-cumparaturi.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Vezi cos</a></li>
+                                    <li class="dropdown"><a href="{{route('contact')}}">Contact</a></li>
+                                    <li class="dropdown"><a href="{{route('cos-cumparaturi')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Vezi cos</a></li>
                                 </ul>
                             </nav>
                         </div>

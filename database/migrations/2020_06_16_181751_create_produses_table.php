@@ -15,13 +15,13 @@ class CreateProdusesTable extends Migration
     {
         Schema::create('produses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nume');
-            $table->bigInteger('id_categorie');
-            $table->float('pret');
-            $table->string('descriere');
-            $table->integer('cantitate_in_stoc');
-            $table->integer('link_poza');
-            $table->integer('este_vizibil');
+            $table->string('nume')->nullable();
+            $table->bigInteger('id_categorie')->nullable();
+            $table->float('pret')->nullable();
+            $table->string('descriere')->nullable();
+            $table->integer('cantitate_in_stoc')->nullable();
+            $table->text('link_poza')->nullable();
+            $table->integer('este_vizibil')->nullable();
             $table->timestamps();
         });
     }

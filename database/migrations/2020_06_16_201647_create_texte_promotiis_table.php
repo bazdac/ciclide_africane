@@ -15,7 +15,7 @@ class CreateTextePromotiisTable extends Migration
     {
         Schema::create('texte_promotiis', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('descriere');
+            $table->string('descriere')->nullable();
             $table->timestamps();
         });
     }

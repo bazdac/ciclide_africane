@@ -2,85 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\CategorieProdus;
 use App\Produs;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ProdusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    function produseToate(){
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $produse = Produs::all();
+        $categorii =CategorieProdus::all();
+        $linkuriCategorii = [
+            1 => route('apa-sarata'),
+            2 => route('apa-dulce'),
+            3 => route('hrana-pesti'),
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Produs  $produs
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Produs $produs)
-    {
-        //
-    }
+        ];
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Produs  $produs
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Produs $produs)
-    {
-        //
+        return view('produse.toate')->with([
+            "produse" => $produse,
+            "categorii" => $categorii,
+            'linkuriCategorii' => $linkuriCategorii
+        ]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Produs  $produs
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Produs $produs)
-    {
-        //
+    function produseApaDulce(){
+        return view('home');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Produs  $produs
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Produs $produs)
-    {
-        //
+    function produseHranaPesti(){
+        return view('home');
+    }
+    function produseApaSarata(){
+        return view('home');
+    }
+    function produsDetalii($idProdus){
+        dd('detalii produs',$idProdus);
     }
 }

@@ -28,6 +28,7 @@
                     <ul class="top-menu float-right">
                         @auth
                             @if(auth()->user()->rol == 'admin')
+                                <li><a href="{{route('home')}}">Vezi site</a></li>
                                 <li><a href="{{route('panou-administrare')}}">Panou administrare</a></li>
                             @endif
 
@@ -74,10 +75,11 @@
                         <ul>
                             <label>Meniu</label>
                             <li>
-                                <a href="{{route('categorii')}}">Categorii produse</a>
+{{--                                <a href="{{route('categorii')}}">Categorii produse</a>--}}
                                 <a href="{{route('produse')}}">Produse</a>
                                 <a href="{{route('utilizatori')}}">Utilizatori</a>
                                 <a href="{{route('comenzi')}}">Comenzi</a>
+                                <a href="{{route('lista-poze')}}">Lista poze</a>
                             </li>
                         </ul>
                     </div>
