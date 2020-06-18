@@ -29,6 +29,18 @@
                         @endif
                     </div>
                     <div class="form-group">
+                        <label for="poza">Poza</label>
+                        <select id="poza" class="form-control {{ $errors->has('poza') ? 'is-invalid' : 'is-valid'}}" name="poza">
+                            <option value="" {{  old('poza') ? '':'selected'  }}>Alege poza produs</option>
+                            @foreach($linkuriPoze as $numePoza => $linkPoza)
+                                <option value="{{$linkPoza}}" {{old('poza')==$linkPoza?'selected':''}}>{{$numePoza}}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('poza'))
+                            <div class="invalid-feedback">{{$errors->first('poza')}}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
                         <label for="nume">Pret</label>
                         <input type="text" id="pret" name="pret" class="form-control {{ $errors->has('pret') ? 'is-invalid' : 'is-valid'}}" value="{{  old('pret') }}">
                         @if($errors->has('pret'))
@@ -43,14 +55,6 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="nume">Poza</label>
-                        <input type="text" id="poza" name="poza" class="form-control {{ $errors->has('poza') ? 'is-invalid' : 'is-valid'}}" value="{{  old('poza')
-                        }}">
-                        @if($errors->has('poza'))
-                            <div class="invalid-feedback">{{$errors->first('poza')}}</div>
-                        @endif
-                    </div>
-                    <div class="form-group">
                         <label for="descriere">Descriere produs</label>
                         <textarea type="text" id="descriere" name="descriere" class="form-control {{ $errors->has('descriere') ?
                         'is-invalid' : 'is-valid'}}">{{  old('descriere') }}</textarea>
@@ -59,7 +63,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Editeaza produs" class="btn btn-success float-right">
+                        <input type="submit" value="Adauga produs" class="btn btn-success float-right">
                     </div>
                 </form>
             </div>

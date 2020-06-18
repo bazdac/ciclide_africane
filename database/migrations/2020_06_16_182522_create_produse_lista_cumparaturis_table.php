@@ -16,6 +16,7 @@ class CreateProduseListaCumparaturisTable extends Migration
         Schema::create('produse_lista_cumparaturis', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('id_user')->nullable();
+            $table->integer('id_comanda')->nullable();
             $table->bigInteger('id_produs')->nullable();
             $table->integer('cantitate')->nullable();
             $table->timestamps();

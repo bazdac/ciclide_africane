@@ -28,13 +28,53 @@ class ProdusController extends Controller
         ]);
     }
     function produseApaDulce(){
-        return view('home');
+
+        $produse = Produs::where('id_categorie','=',2)->get();
+        $categorii =CategorieProdus::all();
+        $linkuriCategorii = [
+            1 => route('apa-sarata'),
+            2 => route('apa-dulce'),
+            3 => route('hrana-pesti'),
+
+        ];
+
+        return view('produse.toate')->with([
+            "produse" => $produse,
+            "categorii" => $categorii,
+            'linkuriCategorii' => $linkuriCategorii
+        ]);
     }
     function produseHranaPesti(){
-        return view('home');
+        $produse = Produs::where('id_categorie','=',3)->get();
+        $categorii =CategorieProdus::all();
+        $linkuriCategorii = [
+            1 => route('apa-sarata'),
+            2 => route('apa-dulce'),
+            3 => route('hrana-pesti'),
+
+        ];
+
+        return view('produse.toate')->with([
+            "produse" => $produse,
+            "categorii" => $categorii,
+            'linkuriCategorii' => $linkuriCategorii
+        ]);
     }
     function produseApaSarata(){
-        return view('home');
+        $produse = Produs::where('id_categorie','=',1)->get();
+        $categorii =CategorieProdus::all();
+        $linkuriCategorii = [
+            1 => route('apa-sarata'),
+            2 => route('apa-dulce'),
+            3 => route('hrana-pesti'),
+
+        ];
+
+        return view('produse.toate')->with([
+            "produse" => $produse,
+            "categorii" => $categorii,
+            'linkuriCategorii' => $linkuriCategorii
+        ]);
     }
     function produsDetalii($idProdus){
         dd('detalii produs',$idProdus);

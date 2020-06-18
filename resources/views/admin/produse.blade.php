@@ -1,6 +1,14 @@
 @extends('layouts.admin')
 
 @section('content')
+    <div class="col-12">
+        @if (session('mesaj'))
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                {{ session('mesaj') }}
+            </div>
+        @endif
+    </div>
     <div class="col-lg-12 mb-3">
         <h4>Produse</h4>
     </div>
@@ -14,6 +22,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Nume produs</th>
                 <th scope="col">Categorie</th>
+                <th scope="col">Poza</th>
                 <th scope="col">Pret</th>
                 <th scope="col">Cantitate</th>
                 <th scope="col">Operatii</th>
@@ -25,6 +34,7 @@
                     <th scope="row">{{$index+1}}</th>
                     <td>{{$produs->nume}}</td>
                     <td>{{$categorii[$produs->id_categorie-1]['nume']}}</td>
+                    <td><a href="{{$produs->link_poza}}" target="_blank">{{array_search($produs->link_poza,$linkuriPoze)}}</a></td>
                     <td>{{$produs->pret}}</td>
                     <td>{{$produs->cantitate_in_stoc}}</td>
                     <td>

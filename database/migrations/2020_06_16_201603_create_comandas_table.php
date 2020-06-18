@@ -15,10 +15,12 @@ class CreateComandasTable extends Migration
     {
         Schema::create('comandas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('id_comanda');
             $table->bigInteger('id_user')->nullable();
-            $table->bigInteger('id_produs')->nullable();
-            $table->integer('cantitate')->nullable();
-            $table->string('data_finalizare')->nullable();
+            $table->text('nume')->nullable();
+            $table->text('adresa')->nullable();
+            $table->text('telefon')->nullable();
+            $table->text('tip_plata')->nullable();
             $table->timestamps();
         });
     }

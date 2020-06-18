@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="{{asset('favicon.ico')}}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>{{ config('app.name', 'Exotic fish') }}</title>
@@ -58,7 +58,7 @@
             <div class="header-inner">
                 <div class="container">
                     <!--Logo-->
-                    <div id="logo"> <a href="{{route('home')}}"><span class="logo-default">Exotic Fish</span><span class="logo-dark">Exotic Fish</span></a> </div>
+                    <div id="logo"> <a href="{{route('home')}}"><span class="logo-default"><img src="{{asset('images/poze_utile/logo.png')}}" alt=""></span><span class="logo-dark">Exotic Fish</span></a> </div>
                     <!--End: Logo-->
 
                     <!--Navigation Resposnive Trigger-->
@@ -74,7 +74,10 @@
                                     <li class="dropdown"><a href="{{route('apa-sarata')}}">Apa sarata</a></li>
                                     <li class="dropdown"><a href="{{route('hrana-pesti')}}">Hrana pesti</a></li>
                                     <li class="dropdown"><a href="{{route('contact')}}">Contact</a></li>
-                                    <li class="dropdown"><a href="{{route('cos-cumparaturi')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Vezi cos</a></li>
+                                    @auth
+                                    <li class="dropdown"><a href="{{route('lista-cumparaturi')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Vezi lista
+                                            cumparaturi</a></li>
+                                    @endauth
                                 </ul>
                             </nav>
                         </div>
@@ -136,5 +139,6 @@
     <!--Plugins-->
     <script src="{{asset('js/jquery.js')}}"></script>
     <script src="{{asset('js/plugins.js')}}"></script>
+    <script src="{{asset('js/custom.js')}}"></script>
 </body>
 </html>

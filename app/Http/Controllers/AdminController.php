@@ -35,9 +35,11 @@ class AdminController extends Controller
     function produse(){
         $categorii = CategorieProdus::all();
         $produse = Produs::all();
+        $linkuriPoze = $this -> listaNumePozeIncarcateSiLinkuri();
         return view('admin.produse')->with([
                 'categorii' => $categorii,
-                'produse' => $produse
+                'produse' => $produse,
+                'linkuriPoze' => $linkuriPoze
             ]
         );
     }
@@ -47,8 +49,11 @@ class AdminController extends Controller
 
     function adaugaProdus(){
         $categorii = CategorieProdus::all();
+        $linkuriPoze = $this -> listaNumePozeIncarcateSiLinkuri();
         return view('admin.adauga_produs')->with([
-                'categorii' => $categorii
+                'categorii' => $categorii,
+                'linkuriPoze' => $linkuriPoze,
+
             ]
         );;
     }
@@ -82,9 +87,12 @@ class AdminController extends Controller
 
         $categorii = CategorieProdus::all();
 
+        $linkuriPoze = $this -> listaNumePozeIncarcateSiLinkuri();
+
         return view('admin.editare_produs')->with([
             'categorii' => $categorii,
             'produs' => $produs,
+            'linkuriPoze' => $linkuriPoze,
             'mesaj' => 'Adaugare produs efectuata cu succes'
         ]);
 
@@ -98,6 +106,7 @@ class AdminController extends Controller
             'poza' => 'required',
             'categorie' => 'integer',
         ]);
+
         $produs = Produs::where('id','=',$idProdus)->firstOrFail();
         $produs -> nume = $request -> nume;
         $produs -> descriere = $request -> descriere;
@@ -112,8 +121,11 @@ class AdminController extends Controller
     }
 
     function stergeProdus($idProdus){
+        $produs = Produs::findOrFail($idProdus);
 
-        dd($idProdus);
+        $produs ->delete();
+
+        return back()->with(['mesaj' => 'Stergere reusita']);
     }
 
     public function listaPoze(){
@@ -121,7 +133,22 @@ class AdminController extends Controller
         $path = public_path('images/pesti');
         $files = File::files($path);
         foreach ($files as $file){
-            $links[] = asset('images/pesti/'.pathinfo($file)['basename']);
+            $links[pathinfo($file)['filename']] = asset('images/pesti/'.pathinfo($file)['basename']);
         }
+        return view('admin.lista_poze')->with([
+            'linkuriPoze' => $links
+        ]);
+
+    }
+
+    public function listaNumePozeIncarcateSiLinkuri()
+    {
+        $path = public_path('images/pesti');
+        $files = File::files($path);
+        foreach ($files as $file){
+            $links[pathinfo($file)['filename']] = asset('images/pesti/'.pathinfo($file)['basename']);
+        }
+
+        return$links;
     }
 }

@@ -37,6 +37,18 @@
                         @endif
                     </div>
                     <div class="form-group">
+                        <label for="poza">Poza</label>
+                        <select id="poza" class="form-control {{ $errors->has('poza') ? 'is-invalid' : 'is-valid'}}" name="poza">
+                            <option value="" {{  old('poza') ? '':'selected'  }}>Alege poza produs</option>
+                            @foreach($linkuriPoze as $numePoza => $linkPoza)
+                                <option value="{{$linkPoza}}" {{(old('poza') ?? $produs -> link_poza)==$linkPoza?'selected':''}}>{{$numePoza}}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('poza'))
+                            <div class="invalid-feedback">{{$errors->first('poza')}}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
                         <label for="nume">Pret</label>
                         <input type="text" id="pret" name="pret" class="form-control {{ $errors->has('pret') ? 'is-invalid' : 'is-valid'}}" value="{{  old('pret') ?? $produs ->pret}}">
                         @if($errors->has('pret'))
@@ -49,15 +61,6 @@
                         ('cantitate') ?? $produs ->cantitate_in_stoc }}">
                         @if($errors->has('cantitate'))
                             <div class="invalid-feedback">{{$errors->first('cantitate')}}</div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="nume">Poza</label>
-                        <input type="text" id="poza" name="poza" class="form-control {{ $errors->has('poza') ? 'is-invalid' : 'is-valid'}}" value="{{  old('poza')?? $produs
-                        ->link_poza
-                        }}">
-                        @if($errors->has('poza'))
-                            <div class="invalid-feedback">{{$errors->first('poza')}}</div>
                         @endif
                     </div>
                     <div class="form-group">

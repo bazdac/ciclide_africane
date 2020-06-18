@@ -2,3 +2,6 @@
 .product .product-reviews, .product .product-reviews a {
     width: 100%;
 }
+.cart-product-quantity .qty {
+    max-width: 50px;
+}
