@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comanda;
 use App\ProduseListaCumparaturi;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -12,20 +13,112 @@ class UserController extends Controller
 
     public function listaCumparaturi()
     {
-        dd('cos cumparaturi');
+        $utilizator = auth()->user();
+        $listaCumparaturi = ProduseListaCumparaturi::where('id_user','=',$utilizator->id)->where('id_comanda','=',null)->with(['produs'])->get();
+        return view('user.lista_cumparaturi') -> with([
+            'utilizator' => $utilizator,
+            'listaCumparaturi' => $listaCumparaturi
+        ]);
+    }
+
+    public function actualizareListaCumparaturi (Request $request)
+    {
+        foreach ($request->all() as $idDeActualizat => $cantitate) {
+            $idListaCumparaturiDeActualizat = str_replace('id-','',$idDeActualizat);
+            $randListaCumparaturi = ProduseListaCumparaturi::where('id','=',$idListaCumparaturiDeActualizat) -> first();
+            if($randListaCumparaturi!==null){
+                $randListaCumparaturi -> cantitate = $cantitate;
+                $randListaCumparaturi->update();
+            }
+        }
+
+        return back()->with(['mesaj'=>'Lista cumparaturi actualizata cu succes']);
     }
 
     public function adaugaLaListaCumparaturi(Request $request)
     {
-        $produsDeAdaugatInListaDeCumparaturi = new ProduseListaCumparaturi();
-        $produsDeAdaugatInListaDeCumparaturi -> id_user = auth()-> user() -> id;
-        $produsDeAdaugatInListaDeCumparaturi -> id_produs = $request -> id_produs;
-        $produsDeAdaugatInListaDeCumparaturi -> cantitate = $request -> cantitate;
-        $produsDeAdaugatInListaDeCumparaturi -> save();
+        $existaInCosProdusul = ProduseListaCumparaturi::where('id_user','=',auth()-> user() -> id)->where('id_produs','=',$request -> id_produs)->where('id_comanda','=',null)
+            ->first();
+        if($existaInCosProdusul !== null){
+            $produsDeAdaugatInListaDeCumparaturi = $existaInCosProdusul;
+            $produsDeAdaugatInListaDeCumparaturi -> id_user = auth()-> user() -> id;
+            $produsDeAdaugatInListaDeCumparaturi -> id_produs = $request -> id_produs;
+            $produsDeAdaugatInListaDeCumparaturi -> cantitate = $produsDeAdaugatInListaDeCumparaturi->cantitate + $request -> cantitate;
+            $produsDeAdaugatInListaDeCumparaturi -> update();
+        }
+        else{
+            $produsDeAdaugatInListaDeCumparaturi = new ProduseListaCumparaturi();
+            $produsDeAdaugatInListaDeCumparaturi -> id_user = auth()-> user() -> id;
+            $produsDeAdaugatInListaDeCumparaturi -> id_produs = $request -> id_produs;
+            $produsDeAdaugatInListaDeCumparaturi -> cantitate = $request -> cantitate;
+            $produsDeAdaugatInListaDeCumparaturi -> save();
+        }
 
         return back() -> with(['mesaj' => 'Produs adaugat cu succes']);
 
+    }
 
+    public function stergeProdusListaCumparaturi(Request $request)
+    {
+
+        $randListaCumparaturi = ProduseListaCumparaturi::where('id','=',$request->id)->where('id_user','=',auth()->user()->id)->first();
+        if($randListaCumparaturi === null){
+            return back()->with(['eroare'=>'Eroare stergere produs din lista de cumparaturi']);
+        }
+        if($randListaCumparaturi->delete() === false){
+            return back()->with(['eroare'=>'Eroare stergere produs din lista de cumparaturi']);
+        }
+        return back()->with(['mesaj'=>'Produsul a fost sters din lista de cumparaturi']);
+
+    }
+
+    public function startComanda()
+    {
+        $utilizator = auth()->user();
+        $listaCumparaturi = ProduseListaCumparaturi::where('id_user','=',$utilizator->id)->where('id_comanda','=',null)->with(['produs'])->get();
+        return view('user.start_comanda') -> with([
+            'utilizator' => $utilizator,
+            'listaCumparaturi' => $listaCumparaturi
+        ]);
+    }
+
+    public function finalizareComanda(Request $request)
+    {
+        $request -> validate([
+            'nume' => 'required',
+            'telefon' => 'required',
+            'adresa' => 'required',
+            'tip_plata' => 'required',
+        ]);
+
+        $utilizator = auth()->user();
+        $listaCumparaturi = ProduseListaCumparaturi::where('id_user','=',$utilizator->id)->where('id_comanda','=',null)->with(['produs'])->get();
+        $comandaNoua = new Comanda();
+        $comandaNoua -> id_user = $utilizator -> id;
+        $comandaNoua -> comanda_numar_inregistrare = substr(md5(mt_rand()), 0, 8);
+        $comandaNoua -> nume = $request -> nume;
+        $comandaNoua -> telefon = $request -> telefon;
+        $comandaNoua -> adresa = $request -> adresa;
+        $comandaNoua -> tip_plata = $request -> tip_plata;
+        $comandaNoua-> save();
+
+        foreach ($listaCumparaturi  as $randListaCumparaturi){
+            $randListaCumparaturi -> id_comanda = $comandaNoua -> id;
+            $randListaCumparaturi->update();
+        }
+
+        return view('user.comanda_finalizata')-> with([
+            'mesaj' => 'Comanda dumneavostra a fost preluata cu succes',
+            'comanda' => $comandaNoua
+        ]);
+    }
+
+    public function comandaFinalizata ($idComanda)
+    {
+        $comanda = Comanda::where('id','=',$idComanda)->firstOrFail();
+        return view('user.comanda_finalizata')->with([
+            'comanda' => $comanda
+        ]);
     }
 
 }

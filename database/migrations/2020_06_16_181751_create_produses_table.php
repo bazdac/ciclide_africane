@@ -18,7 +18,7 @@ class CreateProdusesTable extends Migration
             $table->string('nume')->nullable();
             $table->bigInteger('id_categorie')->nullable();
             $table->float('pret')->nullable();
-            $table->string('descriere')->nullable();
+            $table->text('descriere')->nullable();
             $table->integer('cantitate_in_stoc')->nullable();
             $table->text('link_poza')->nullable();
             $table->integer('este_vizibil')->nullable();

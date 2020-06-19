@@ -12,6 +12,9 @@
     <div class="col-lg-12 mb-3">
         <h4>Editare produs</h4>
     </div>
+    <div class="col-lg-3">
+        <a href="{{route('adauga-produs')}}" type="button" class="btn btn-sm">Adauga produs</a>
+    </div>
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">

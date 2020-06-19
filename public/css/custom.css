@@ -5,3 +5,7 @@
 .cart-product-quantity .qty {
     max-width: 50px;
 }
+.shop-cart .cart-product-thumbnail img {
+     max-width: unset;
+    max-height: 75px;
+}

@@ -77,6 +77,10 @@ class ProdusController extends Controller
         ]);
     }
     function produsDetalii($idProdus){
-        dd('detalii produs',$idProdus);
+        $produs = Produs::where('id','=',$idProdus)->firstOrFail();
+
+        return view('produse.detalii_produs')->with([
+            'produs' => $produs
+        ]);
     }
 }
