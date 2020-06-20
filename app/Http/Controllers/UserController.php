@@ -92,6 +92,7 @@ class UserController extends Controller
         ]);
 
         $utilizator = auth()->user();
+
         $listaCumparaturi = ProduseListaCumparaturi::where('id_user','=',$utilizator->id)->where('id_comanda','=',null)->with(['produs'])->get();
         $comandaNoua = new Comanda();
         $comandaNoua -> id_user = $utilizator -> id;
@@ -103,8 +104,10 @@ class UserController extends Controller
         $comandaNoua-> save();
 
         foreach ($listaCumparaturi  as $randListaCumparaturi){
-            $randListaCumparaturi -> id_comanda = $comandaNoua -> id;
-            $randListaCumparaturi->update();
+            if($randListaCumparaturi->id_comanda == null){
+                $randListaCumparaturi -> id_comanda = $comandaNoua -> id;
+                $randListaCumparaturi->update();
+            }
         }
 
         return view('user.comanda_finalizata')-> with([
@@ -119,6 +122,11 @@ class UserController extends Controller
         return view('user.comanda_finalizata')->with([
             'comanda' => $comanda
         ]);
+    }
+    public function detaliiComanda($idComanda)
+    {
+        $comanda = Comanda::where('id','=',$idComanda)->where('id_user','=',auth()->user()->id)->firstOrFail();
+        dd(__METHOD__);
     }
 
 }

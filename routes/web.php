@@ -35,6 +35,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/editeaza-produs/{id}', 'AdminController@editeazaProdus')->name('editeaza-produs');
     Route::get('/actualizare-produs/{id}', 'AdminController@actualizareProdus')->name('actualizare-produs');
     Route::get('/sterge-produs/{id}', 'AdminController@stergeProdus')->name('sterge-produs');
+    Route::get('/comenzi-utilizator/{id}', 'AdminController@comenziUtilizator')->name('comenzi-utilizator');
+    Route::get('/detalii-comanda/{id}', 'AdminController@detaliiComanda')->name('detalii-comanda');
+    Route::get('/detalii-comanda-utilizator/{id}', 'UserController@detaliiComanda')->name('detalii-comanda-utilizator');
 
     Route::get('/adauga-la-lista-cumparaturi', 'UserController@adaugaLaListaCumparaturi')->name('adauga-la-lista-cumparaturi');
     Route::get('/actualizare-lista-cumparaturi', 'UserController@actualizareListaCumparaturi')->name('actualizare-lista-cumparaturi');
@@ -42,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/start-comanda', 'UserController@startComanda')->name('start-comanda');
     Route::get('/finalizare-comanda', 'UserController@finalizareComanda')->name('finalizare-comanda');
     Route::get('/comanda-finalizata/{id}', 'UserController@comandaFinalizata')->name('comanda-finalizata');
+
 
 
     Route::get('/utilizatori', 'AdminController@utilizatori')->name('utilizatori');

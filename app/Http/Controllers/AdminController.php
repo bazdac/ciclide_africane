@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\CategorieProdus;
+use App\Comanda;
 use App\Http\Controllers\Controller;
 use App\Produs;
+use App\ProduseListaCumparaturi;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -29,7 +32,14 @@ class AdminController extends Controller
         );
     }
     function comenzi(){
-        dd(__METHOD__);
+        if(auth()->user()->rol !== 'admin'){
+            return back()->with(['eroare'=>'Nu aveti access la aceste informatii']);
+        }
+
+        $comenziUtilizator = Comanda::all();
+        return view('admin.lista_comenzi')->with([
+            'comenziUtilizator' => $comenziUtilizator
+        ]);
     }
 
     function produse(){
@@ -43,8 +53,14 @@ class AdminController extends Controller
             ]
         );
     }
+
     function utilizatori(){
-        dd(__METHOD__);
+        $utilizatori = User::where('rol','=',null)->get();
+        return view('admin.utilizatori')->with([
+                'utilizatori' => $utilizatori,
+
+            ]
+        );
     }
 
     function adaugaProdus(){
@@ -55,8 +71,9 @@ class AdminController extends Controller
                 'linkuriPoze' => $linkuriPoze,
 
             ]
-        );;
+        );
     }
+
     function creareProdus(Request $request){
 
         $request -> validate([
@@ -97,6 +114,7 @@ class AdminController extends Controller
         ]);
 
     }
+
     function actualizareProdus(Request $request,$idProdus){
         $request -> validate([
             'nume' => 'required',
@@ -150,5 +168,45 @@ class AdminController extends Controller
         }
 
         return$links;
+    }
+
+    public function comenziUtilizator($idUtilizator)
+    {
+        if(auth()->user()->rol !== 'admin'){
+            return back()->with(['eroare'=>'Nu aveti access la aceste informatii']);
+        }
+
+        $comenziUtilizator = Comanda::where('id_user','=',$idUtilizator)->get();
+        $utilizator = User::where('id','=',$idUtilizator)->firstOrFail();
+        return view('admin.lista_comenzi_utilizator')->with([
+            'utilizator' => $utilizator,
+            'comenziUtilizator' => $comenziUtilizator
+        ]);
+    }
+
+    public function detaliiComanda($idComanda)
+    {
+        if(auth()->user()->rol !== 'admin'){
+            return back()->with(['eroare'=>'Nu aveti access la aceste informatii']);
+        }
+        $comanda = Comanda::where('id','=',$idComanda)->firstOrFail();
+        $utilizator = User::where('id','=',$comanda->id_user)->firstOrFail();
+        $produseComanda = ProduseListaCumparaturi::where('id_comanda','=',$comanda-> id)->get();
+        return view('admin.detalii_comanda_utilizator')->with([
+            'comanda' => $comanda,
+            'produseComanda' => $produseComanda,
+            'utilizator' => $utilizator
+        ]);
+    }
+
+    public function valoareComanda($idComanda)
+    {
+        $produseComanda = ProduseListaCumparaturi::where('id_comanda','=',$idComanda)->get();
+        $totalComanda = 0;
+        foreach ($produseComanda as $item) {
+            $produs = Produs::where('id','=',$item -> id_produs)->firstOrFail();
+            $totalComanda = $totalComanda + $produs->pret * $item->cantitate;
+        }
+        return$totalComanda;
     }
 }

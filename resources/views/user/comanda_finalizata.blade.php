@@ -5,7 +5,7 @@
         <div class="container">
             <div class="page-title">
                 <h1>Comanda finalizata</h1>
-                <span>Felicitari comanda dumneavostra a fost finalizata</span>
+                <span>Felicitari! Comanda dumneavostra a fost finalizata!</span>
             </div>
             <div class="breadcrumb">
                 <ul>
@@ -22,10 +22,10 @@
         <div class="container">
             <div class="p-t-10 m-b-20 text-center">
                 <div class="text-center">
-                    <h3>Felicitari comanda dumneavostra a fost finalizata!</h3>
+                    <h3>Felicitari! Comanda dumneavostra a fost finalizata!</h3>
                     <p>Numarul comenzii dumneavosta este <mark>{{$comanda -> comanda_numar_inregistrare}}</mark>
                 </div>
-                <a class="btn icon-left" href="{{route('home')}}"><span>Intoarcete la magazin</span></a>
+                <a class="btn icon-left" href="{{route('home')}}"><span>Intoarce-te la magazin</span></a>
             </div>
         </div>
     </section>
