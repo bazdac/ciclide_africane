@@ -4,7 +4,7 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 offset-4">
+                <div class="col-xs-12 offset-xs-0 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
                     <div class="panel ">
                         <div class="panel-body">
                             <h3>{{ __('Autentificare') }}</h3>
@@ -53,7 +53,7 @@
                             </form>
                         </div>
                     </div>
-                    <p class="small">Nu ai cont?<a href="#">Creaza cont nou</a></p>
+                    <p class="small">Nu ai cont?<a href="{{route('register')}}">Creaza cont nou</a></p>
                 </div>
             </div>
         </div>

@@ -97,10 +97,9 @@
         </div>
     </footer>
 </div>
-<!-- Scroll top -->
-<a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
-<!--Plugins-->
 <script src="{{asset('js/jquery.js')}}"></script>
 <script src="{{asset('js/plugins.js')}}"></script>
+<script src="{{asset('js/functions.js')}}"></script>
+<script src="{{asset('js/custom.js')}}"></script>
 </body>
 </html>

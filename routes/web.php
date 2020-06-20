@@ -15,15 +15,16 @@ Route::get('/home', 'ProdusController@produseToate');
 Route::get('/', 'ProdusController@produseToate')->name('home');
 
 
-Auth::routes();
+
 
 Route::get('/apa-sarata', 'ProdusController@produseApaSarata')->name('apa-sarata');
 Route::get('/apa-dulce', 'ProdusController@produseApaDulce')->name('apa-dulce');
 Route::get('/hrana-pesti', 'ProdusController@produseHranaPesti')->name('hrana-pesti');
 Route::get('/detalii-produs/{id}', 'ProdusController@produsDetalii')->name('detalii-produs');
 Route::get('/contact', 'HomeController@contact')->name('contact');
-Route::get('/trimitere-mesaj', 'HomeController@trimitereMesajContact')->name('trimitere-mesaj');
+Route::post('/trimitere-mesaj', 'HomeController@trimitereMesajContact')->name('trimitere-mesaj');
 
+Auth::routes();
 
 
 Route::group(['middleware' => ['auth']], function () {

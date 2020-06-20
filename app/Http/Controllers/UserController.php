@@ -109,6 +109,29 @@ class UserController extends Controller
                 $randListaCumparaturi->update();
             }
         }
+        $htmlEmailUtilizator= '
+            Multumim pentru comanda dumneavostra<br>
+            Detalii comanda<br>
+            Numar inregistrare: '.$comandaNoua -> comanda_numar_inregistrare.'<br>
+            Nume: '.$comandaNoua -> nume.'<br>
+            Telefon: '.$comandaNoua -> telefon.'<br>
+            Adresa: '.$comandaNoua -> adresa.'<br>
+            Tip plata: '.$comandaNoua -> tip_plata.'<br>
+            Total comanda: '.(new AdminController())->valoareComanda($comandaNoua->id).' RON<br>
+        ';
+        $htmlEmailAdministrator= '
+            Comanda noua magazin<br>
+            Detalii comanda<br>
+            Numar inregistrare: '.$comandaNoua -> comanda_numar_inregistrare.'<br>
+            Nume: '.$comandaNoua -> nume.'<br>
+            Telefon: '.$comandaNoua -> telefon.'<br>
+            Adresa: '.$comandaNoua -> adresa.'<br>
+            Tip plata: '.$comandaNoua -> tip_plata.'<br>
+            Total comanda: '.(new AdminController())->valoareComanda($comandaNoua->id).' RON<br>
+        ';
+        $controlerMail = (new HomeController());
+        $controlerMail->trimitereEmail('Comanda noua numarul '.$comandaNoua -> comanda_numar_inregistrare,'Comanda ta','exotic.fish.magazin@gmail.com','Exotic Fish',$utilizator -> email,$htmlEmailUtilizator);
+        $controlerMail->trimitereEmail('Comanda noua numarul '.$comandaNoua -> comanda_numar_inregistrare,'Comanda noua','exotic.fish.magazin@gmail.com','Exotic Fish','exotic.fish.magazin@gmail.com',$htmlEmailAdministrator);
 
         return view('user.comanda_finalizata')-> with([
             'mesaj' => 'Comanda dumneavostra a fost preluata cu succes',

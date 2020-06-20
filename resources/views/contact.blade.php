@@ -7,30 +7,55 @@
                 <div class="col-lg-6">
                     <h3 class="text-uppercase">Contacteaza-ne</h3>
                     <div class="m-t-30">
-                        <form class="widget-contact-form" novalidate action="{{route('trimitere-mesaj')}}" role="form" >
+                        <form class="contact-form" novalidate action="{{route('trimitere-mesaj')}}" role="form" method="post">
+                            @csrf
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="nume">Nume</label>
-                                    <input type="text" aria-required="true" name="nume" required class="form-control required name" placeholder="Nume">
+                                    <input type="text" aria-required="true" name="nume" required class="form-control required name {{ $errors->has('nume') ? 'is-invalid' : ''}}" placeholder="Nume" value="{{  old('nume') }}">
+                                    @if($errors->has('nume'))
+                                        <div class="invalid-feedback">{{$errors->first('nume')}}</div>
+                                    @endif
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="email">Email</label>
-                                    <input type="email" aria-required="true" name="email" required class="form-control required email" placeholder="Email">
+                                    <input type="email" aria-required="true" name="email" required class="form-control required email {{ $errors->has('email') ? 'is-invalid' : ''}}" placeholder="Email" value="{{  old('email') }}">
+                                    @if($errors->has('email'))
+                                        <div class="invalid-feedback">{{$errors->first('email')}}</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label for="subject">Subiect</label>
-                                    <input type="text" name="subiect" required class="form-control required" placeholder="Subiect">
+                                    <input type="text" name="subiect" required class="form-control required {{ $errors->has('subiect') ? 'is-invalid' : ''}}" placeholder="Subiect" value="{{  old('subiect') }}">
+                                    @if($errors->has('subiect'))
+                                        <div class="invalid-feedback">{{$errors->first('subiect')}}</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="message">Mesaj</label>
-                                <textarea type="text" name="mesaj" required rows="5" class="form-control required" placeholder="Mesaj"></textarea>
+                                <textarea type="text" name="mesaj" required rows="5" class="form-control required {{ $errors->has('mesaj') ? 'is-invalid' : ''}}" placeholder="Mesaj">{{  old('mesaj') }}</textarea>
+                                @if($errors->has('mesaj'))
+                                    <div class="invalid-feedback">{{$errors->first('mesaj')}}</div>
+                                @endif
                             </div>
                             <button class="btn" type="submit" id="form-submit">&nbsp;Trimite mesaj</button>
                         </form>
                     </div>
+                    @if (session('succes'))
+                        <div class="alert alert-success alert-dismissible m-t-30">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            {{ session('succes') }}
+                        </div>
+                    @endif
+                    @if (session('eroare'))
+                        <div class="alert alert-danger alert-dismissible m-t-30">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            {{ session('eroare') }}
+                        </div>
+                    @endif
                 </div>
                 <div class="col-lg-6">
                     <h3 class="text-uppercase">Adresa si harta</h3>

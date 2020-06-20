@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <ul class="top-menu">
-                            <li>Bine ai venit @auth {{auth()->user()->email}} @endauth</li>
+                            <li> @auth Bine ai venit {{auth()->user()->email}} @endauth</li>
                         </ul>
                     </div>
                     <div class="col-md-6 d-none d-sm-block text-right">
@@ -70,12 +70,12 @@
                             <nav>
                                 <ul>
                                     <li><a href="{{route('home')}}">Acasa</a></li>
-                                    <li class="dropdown"><a href="{{route('apa-dulce')}}">Apa dulce</a></li>
-                                    <li class="dropdown"><a href="{{route('apa-sarata')}}">Apa sarata</a></li>
-                                    <li class="dropdown"><a href="{{route('hrana-pesti')}}">Hrana pesti</a></li>
-                                    <li class="dropdown"><a href="{{route('contact')}}">Contact</a></li>
+                                    <li class=""><a href="{{route('apa-dulce')}}">Apa dulce</a></li>
+                                    <li class=""><a href="{{route('apa-sarata')}}">Apa sarata</a></li>
+                                    <li class=""><a href="{{route('hrana-pesti')}}">Hrana pesti</a></li>
+                                    <li class=""><a href="{{route('contact')}}">Contact</a></li>
                                     @auth
-                                    <li class="dropdown"><a href="{{route('lista-cumparaturi')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Vezi lista
+                                    <li class=""><a href="{{route('lista-cumparaturi')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Vezi lista
                                             cumparaturi</a></li>
                                     @endauth
                                 </ul>
@@ -134,11 +134,11 @@
             </div>
         </footer>
     </div>
-    <!-- Scroll top -->
-    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
-    <!--Plugins-->
+
     <script src="{{asset('js/jquery.js')}}"></script>
     <script src="{{asset('js/plugins.js')}}"></script>
+    <script src="{{asset('js/functions.js')}}"></script>
     <script src="{{asset('js/custom.js')}}"></script>
+
 </body>
 </html>
