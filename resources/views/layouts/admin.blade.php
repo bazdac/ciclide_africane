@@ -53,6 +53,50 @@
             </div>
         </div>
     </div>
+    <header id="header"  class="d-block d-md-none">
+        <div class="header-inner">
+            <div class="container">
+                <!--Logo-->
+                <div id="logo"> <a href="{{route('home')}}"><span class="logo-default"><img src="{{asset('images/poze_utile/logo.png')}}" alt=""></span><span class="logo-dark">Exotic Fish</span></a> </div>
+                <!--End: Logo-->
+                <!--Navigation Resposnive Trigger-->
+                <div id="mainMenu-trigger"> <a class="lines-button x"><span class="lines"></span></a> </div>
+                <!--end: Navigation Resposnive Trigger-->
+                <!--Navigation-->
+                <div id="mainMenu" >
+                    <div class="container">
+                        <nav>
+                            <ul>
+                                @auth
+                                    @if(auth()->user()->rol == 'admin')
+                                        <li><a href="{{route('home')}}">Vezi site</a></li>
+                                        <li><a href="{{route('panou-administrare')}}">Panou administrare</a></li>
+                                    @endif
+
+                                    <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Iesire') }}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                @else
+                                    <li><a href="{{ route('login') }}">Autentificare</a></li>
+                                    @if (Route::has('register'))
+                                        <li><a href="{{ route('register') }}">Inregistrare</a></li>
+                                    @endif
+
+                                @endauth
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!--end: Navigation-->
+            </div>
+        </div>
+    </header>
 
     <section id="page-title" class="page-title-classic">
         <div class="container">

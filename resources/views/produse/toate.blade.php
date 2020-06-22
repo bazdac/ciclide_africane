@@ -6,8 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="text-medium">Promotie luna Iunie</h2>
-                    <p>Transport gratuit la orice comanda peste 200 RON</p>
+                    {!!(new \App\TextePromotii())->textPromotie()!!}
                 </div>
             </div>
         </div>

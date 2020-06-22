@@ -39,6 +39,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/comenzi-utilizator/{id}', 'AdminController@comenziUtilizator')->name('comenzi-utilizator');
     Route::get('/detalii-comanda/{id}', 'AdminController@detaliiComanda')->name('detalii-comanda');
     Route::get('/detalii-comanda-utilizator/{id}', 'UserController@detaliiComanda')->name('detalii-comanda-utilizator');
+    Route::get('/salveaza-camp-retur', 'AdminController@salveazaCampRetur')->name('salveaza-camp-retur');
+    Route::get('/salveaza-camp-livrare', 'AdminController@salveazaCampLivrare')->name('salveaza-camp-livrare');
+    Route::get('/salveaza-camp-discount', 'AdminController@salveazaCampDiscount')->name('salveaza-camp-discount');
+    Route::get('/salveaza-camp-promotie', 'AdminController@salveazaCampPromotie')->name('salveaza-camp-promotie');
 
     Route::get('/adauga-la-lista-cumparaturi', 'UserController@adaugaLaListaCumparaturi')->name('adauga-la-lista-cumparaturi');
     Route::get('/actualizare-lista-cumparaturi', 'UserController@actualizareListaCumparaturi')->name('actualizare-lista-cumparaturi');

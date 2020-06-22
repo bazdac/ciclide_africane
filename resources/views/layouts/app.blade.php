@@ -78,6 +78,28 @@
                                     <li class=""><a href="{{route('lista-cumparaturi')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Vezi lista
                                             cumparaturi</a></li>
                                     @endauth
+                                    @auth
+                                        @if(auth()->user()->rol == 'admin')
+                                            <li class="d-block d-md-none"><a href="{{route('home')}}">Vezi site</a></li>
+                                            <li class="d-block d-md-none"><a href="{{route('panou-administrare')}}">Panou administrare</a></li>
+                                        @endif
+
+                                        <li class="d-block d-md-none"><a class="dropdown-item" href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                                {{ __('Iesire') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    @else
+                                        <li class="d-block d-md-none"><a href="{{ route('login') }}">Autentificare</a></li>
+                                        @if (Route::has('register'))
+                                            <li class="d-block d-md-none"><a href="{{ route('register') }}">Inregistrare</a></li>
+                                        @endif
+
+                                    @endauth
                                 </ul>
                             </nav>
                         </div>
@@ -100,8 +122,7 @@
                             <div class="icon">
                                 <a href="#"><i class="fa fa-gift"></i></a>
                             </div>
-                            <h3>Discount 10% la comenzi cu valoare peste 600</h3>
-                            <p>Comanda minima de 100 ron.</p>
+                            {!!  (new \App\TextePromotii())->textDiscount() !!}
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -109,8 +130,7 @@
                             <div class="icon">
                                 <a href="#"><i class="fa fa-plane"></i></a>
                             </div>
-                            <h3>Livrare in toata tara 1-3 zie lucratoare</h3>
-                            <p>Taxa transport plata in avans 15 ron , 25 ron la plata ramburs.</p>
+                            {!! (new \App\TextePromotii())->textLivrare() !!}
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -118,8 +138,7 @@
                             <div class="icon">
                                 <a href="#"><i class="fa fa-history"></i></a>
                             </div>
-                            <h3>30 zile retur gratuit!</h3>
-                            <p>Doar la hrana.</p>
+                            {!!(new \App\TextePromotii())->textRetur()!!}
                         </div>
                     </div>
                 </div>

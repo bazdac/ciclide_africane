@@ -7,6 +7,7 @@ use App\Comanda;
 use App\Http\Controllers\Controller;
 use App\Produs;
 use App\ProduseListaCumparaturi;
+use App\TextePromotii;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -208,5 +209,42 @@ class AdminController extends Controller
             $totalComanda = $totalComanda + $produs->pret * $item->cantitate;
         }
         return$totalComanda;
+    }
+
+    public function salveazaCampRetur(Request $request)
+    {
+        $retur = TextePromotii::firstOrCreate(['id' => 4]);
+        $retur -> descriere = $request -> retur;
+        $retur-> update();
+
+        return back() -> with(['mesaj'=> 'Campul retur a fost modificat cu succes']);
+
+    }
+    public function salveazaCampLivrare(Request $request)
+    {
+        $livrare = TextePromotii::firstOrCreate(['id' => 3]);
+        $livrare -> descriere = $request -> livrare;
+        $livrare -> update();
+
+        return back() -> with(['mesaj'=> 'Campul livrare a fost modificat cu succes']);
+
+    }
+    public function salveazaCampDiscount(Request $request)
+    {
+        $discount = TextePromotii::firstOrCreate(['id' => 2]);
+        $discount -> descriere = $request -> discount;
+        $discount -> update();
+
+        return back() -> with(['mesaj'=> 'Campul discount a fost modificat cu succes']);
+
+    }
+    public function salveazaCampPromotie(Request $request)
+    {
+        $promotie = TextePromotii::firstOrCreate(['id' => 1]);
+        $promotie -> descriere = $request -> promotie;
+        $promotie -> update();
+
+        return back() -> with(['mesaj'=> 'Campul promotie a fost modificat cu succes']);
+
     }
 }
