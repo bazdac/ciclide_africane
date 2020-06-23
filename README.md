@@ -1,1 +1,1 @@
-# pestisorul
+Aplicatie de tip magazin online bazata pe Laravel
