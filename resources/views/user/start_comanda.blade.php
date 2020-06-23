@@ -143,11 +143,10 @@
                                     <table class="table">
                                         <tbody>
                                         <tr>
-                                            <td class="cart-product-name">
-                                                <strong>Subtotal</strong>
-                                            </td>
-                                            <td class="cart-product-name text-right">
-                                                <span class="amount">{{$totalCos}} RON</span>
+                                            <td class="cart-product-name" colspan="2">
+                                                <strong><i class="fa fa-exclamation-triangle fa-2x"></i> La suma facturata se adauga pretul transportului si discounturilor,
+                                                    conform promotiilor
+                                                    actuale</strong>
                                             </td>
                                         </tr>
                                         <tr>
