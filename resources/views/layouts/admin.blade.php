@@ -111,6 +111,7 @@
         <div class="container">
             <div class="row">
                 <div class="content col-lg-9">
+{{--                   aici introduc continutul diferitelor pagini--}}
                     @yield('content')
                 </div>
                 <!-- Sidebar-->
@@ -119,7 +120,6 @@
                         <ul>
                             <label>Meniu</label>
                             <li>
-{{--                                <a href="{{route('categorii')}}">Categorii produse</a>--}}
                                 <a href="{{route('produse')}}">Produse</a>
                                 <a href="{{route('utilizatori')}}">Utilizatori</a>
                                 <a href="{{route('comenzi')}}">Comenzi</a>

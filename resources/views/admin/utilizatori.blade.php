@@ -28,10 +28,10 @@
             @foreach($utilizatori as $index => $utilizator)
                 <tr>
                     <th scope="row">{{$index+1}}</th>
-                    <td>{{$utilizator->email??'-'}}</td>
-                    <td>{{$utilizator->name??'-'}}</td>
-                    <td>{{$utilizator->adresa??'-'}}</td>
-                    <td>{{$utilizator->telefon??'-'}}</td>
+                    <td>{!!$utilizator->email??'<span class="text-danger"> necompletat </span>'!!}</td>
+                    <td>{!!$utilizator->name??'<span class="text-danger"> necompletat </span>'!!}</td>
+                    <td>{!!$utilizator->adresa??'<span class="text-danger"> necompletat </span>'!!}</td>
+                    <td>{!!$utilizator->telefon??'<span class="text-danger"> necompletat </span>'!!}</td>
                     <td>
                         <a class="btn btn-info btn-xs" href="{{route('comenzi-utilizator',$utilizator->id)}}">
                             {{__('Vezi comenzi')}}

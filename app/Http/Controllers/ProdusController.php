@@ -15,6 +15,7 @@ class ProdusController extends Controller
         $produse = Produs::all();
         $categorii =CategorieProdus::all();
         $linkuriCategorii = [
+            //id_categorie de pe produs => ruta_catagorie
             1 => route('apa-sarata'),
             2 => route('apa-dulce'),
             3 => route('hrana-pesti'),

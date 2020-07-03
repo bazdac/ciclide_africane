@@ -58,7 +58,13 @@
             <div class="header-inner">
                 <div class="container">
                     <!--Logo-->
-                    <div id="logo"> <a href="{{route('home')}}"><span class="logo-default"><img src="{{asset('images/poze_utile/logo.png')}}" alt=""></span><span class="logo-dark">Exotic Fish</span></a> </div>
+                    <div id="logo">
+                        <a href="{{route('home')}}">
+                            <span class="logo-default">
+                                <img src="{{asset('images/poze_utile/logo.png')}}" alt=""></span>
+                            <span class="logo-dark">Exotic Fish</span>
+                        </a>
+                    </div>
                     <!--End: Logo-->
 
                     <!--Navigation Resposnive Trigger-->
