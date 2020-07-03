@@ -66,9 +66,9 @@
                                 @endphp
                                 <tr>
                                     <td class="cart-product-remove">
-                                        <a href="{{route('sterge-produs-lista-cumparaturi',['id'=>$elementListaCumparaturi -> id])}}" onclick="return confirm('Sunteti sigur ca ' +
-                                         'vreti sa stergeti produsul');"><i
-                                                class="fa fa-times"></i></a>
+                                        <a href="{{route('sterge-produs-lista-cumparaturi',['id'=>$elementListaCumparaturi -> id])}}"
+                                           onclick="return confirm('Sunteti sigur ca vreti sa stergeti produsul');">
+                                            <i class="fa fa-times"></i></a>
                                     </td>
                                     <td class="cart-product-thumbnail">
                                         <a href="{{route('detalii-produs',$elementListaCumparaturi->produs->id)}}">

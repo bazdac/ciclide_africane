@@ -124,6 +124,7 @@ class UserController extends Controller
             Detalii comanda<br>
             Numar inregistrare: '.$comandaNoua -> comanda_numar_inregistrare.'<br>
             Nume: '.$comandaNoua -> nume.'<br>
+            Utilizator: '.auth()->user()->email.' <br>
             Telefon: '.$comandaNoua -> telefon.'<br>
             Adresa: '.$comandaNoua -> adresa.'<br>
             Tip plata: '.$comandaNoua -> tip_plata.'<br>

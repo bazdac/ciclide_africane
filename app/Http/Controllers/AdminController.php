@@ -37,7 +37,7 @@ class AdminController extends Controller
             return back()->with(['eroare'=>'Nu aveti access la aceste informatii']);
         }
 
-        $comenziUtilizator = Comanda::all();
+        $comenziUtilizator = Comanda::all()->sortByDesc('created_at');
         return view('admin.lista_comenzi')->with([
             'comenziUtilizator' => $comenziUtilizator
         ]);

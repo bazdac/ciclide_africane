@@ -11,6 +11,7 @@
     </div>
     <div class="col-lg-12 mb-3">
         <h4>Detalii comanda numarul {{$comanda->comanda_numar_inregistrare}}</h4>
+        <p>Data comenzii: {{date('Y/m/d H:i',strtotime($comanda->created_at))}}</p>
     </div>
     <div class="col-lg-12">
         <table class="table">
